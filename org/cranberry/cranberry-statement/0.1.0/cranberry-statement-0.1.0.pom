@@ -9,12 +9,12 @@
     <relativePath>../</relativePath>
   </parent>
   <groupId>org.cranberry</groupId>
-  <artifactId>cranberry-engine</artifactId>
+  <artifactId>cranberry-statement</artifactId>
   <version>0.1.0</version>
-  <name>cranberry-engine</name>
-  <description>The cranberry engine is a module of Cranberry library (see cranberry). This module provides a general realisation
-        of simple tools and wrappers which are used in another cranberry modules for the automatically code
-        generating during compilation.</description>
+  <name>cranberry-statement</name>
+  <description>The cranberry statement is a module of cranberry library (see cranberry). This module provides an api for the
+        statements validation (such as not null and e.t.c.). This module includes an annotations for the injecting methods
+        of this api into code during compilation.</description>
   <url>https://github.com/ololx/cranberry</url>
   <inceptionYear>2019</inceptionYear>
   <licenses>
@@ -34,11 +34,37 @@
       </roles>
     </developer>
   </developers>
+  <properties>
+    <junit-jupiter.version>5.5.2</junit-jupiter.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.cranberry</groupId>
+      <artifactId>cranberry-engine</artifactId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <configuration>
+              <compilerArgument>-proc:none</compilerArgument>
+            </configuration>
+          </execution>
+          <execution>
+            <id>compile-project</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
